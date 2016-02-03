@@ -5,7 +5,7 @@ with webpack, webpack-dev-server, babel-loader
 
 1.  下載 react-template
     
-    > git clone https://github.com/FayeHuang/react-template.git
+    > git clone http://10.144.129.135/Faye/react-template.git
     
     > cd react-template
 
@@ -17,6 +17,7 @@ with webpack, webpack-dev-server, babel-loader
 
     > PORT=8080 npm start
 
-  如果要介接 mock server
+    如果要介接 mock server
 
     > MOCK_SERVER=http://10.10.10.10:8888 PORT=8080 npm start
+
