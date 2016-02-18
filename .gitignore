@@ -1,0 +1,7 @@
+/*
+!.gitignore
+!assets
+!package.json
+!webpack.config.js
+!.eslintrc
+!README.md
