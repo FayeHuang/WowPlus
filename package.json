@@ -17,9 +17,7 @@
     "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.7.3",
     "material-ui": "^0.15.0-alpha",
-    "react-pure-render": "^1.0.2",
     "react-tap-event-plugin": "^0.2.2",
-    "amdefine": "^1.0.0",
     "react-router": "^2.0.1",
     "redux": "^3.3.1"
   }
