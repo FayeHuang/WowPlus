@@ -25,8 +25,7 @@ export default class DiskPage extends React.Component {
                                                       defaultSelected="project" 
                                                       style={{ display:'flex', 
                                                                flexDirection:'row',
-                                                               minWidth:'100px',
-                                                               maxWidth:'130px'
+                                                               maxWidth:'100px'
                                                             }}>
                                         <RadioButton
                                             value="project"
@@ -34,7 +33,7 @@ export default class DiskPage extends React.Component {
                                         />
                                         <RadioButton
                                             value="business"
-                                            label="業務類別"
+                                            label="業務"
                                         />
                                     </RadioButtonGroup>
                                 </div>
