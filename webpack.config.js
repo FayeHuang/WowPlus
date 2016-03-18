@@ -1,6 +1,7 @@
 var path = require('path');
 var merge = require('webpack-merge');
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
@@ -29,7 +30,11 @@ const common = {
         query: {
           presets: ['react','es2015','stage-0']
         }
-      } // to transform JSX into JS
+      }, // to transform JSX into JS
+      { 
+        test: /\.css$/, 
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader') 
+      }
     ]
   },
 
@@ -67,7 +72,8 @@ if(TARGET === 'start' || !TARGET) {
       }
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new ExtractTextPlugin('main.css')
     ]
   });
 }
