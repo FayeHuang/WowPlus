@@ -12,7 +12,7 @@ const common = {
   // Entry accepts a path or an object of entries.
   // Thq:e build chapter contains an example of the latter.
   entry: [ 
-    PATHS.src + '/index.jsx',
+    PATHS.src + '/js/index.jsx'
   ],
 
   output: {
@@ -29,14 +29,14 @@ const common = {
         query: {
           presets: ['react','es2015','stage-0']
         }
-      }, // to transform JSX into JS
+      } // to transform JSX into JS
     ]
   },
 
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx']
-  }, 
+  }
 };
 
 // Default configuration
@@ -62,13 +62,13 @@ if(TARGET === 'start' || !TARGET) {
       proxy: {
         '/api/*': {
           target: process.env.MOCK_SERVER || 'http://127.0.0.1:8888',
-          secure: false,
-        },
+          secure: false
+        }
       }
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-    ],
+      new webpack.HotModuleReplacementPlugin()
+    ]
   });
 }
 
