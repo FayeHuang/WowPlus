@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router'
 
-import Main from './Main'
-import DiskPage from './DiskPage'
-import CpuPage from './CpuPage'
-import MemoryPage from './MemoryPage'
+import Main from './components/Main'
+import DiskPage from './components/DiskPage'
+import CpuPage from './components/CpuPage'
+import MemoryPage from './components/MemoryPage'
 
 import './style/main.css'
 
