@@ -11,7 +11,7 @@ module.exports = {
   // Entry accepts a path or an object of entries.
   // Thq:e build chapter contains an example of the latter.
   entry: [ 
-    PATHS.src + '/js/index.jsx'
+    PATHS.src + '/index.jsx'
   ],
 
   output: {
