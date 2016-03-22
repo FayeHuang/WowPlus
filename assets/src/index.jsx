@@ -7,7 +7,7 @@ import DiskPage from './DiskPage'
 import CpuPage from './CpuPage'
 import MemoryPage from './MemoryPage'
 
-import '../css/main.css'
+import './style/main.css'
 
 ReactDOM.render((
 	<Router history={browserHistory}>
