@@ -15,15 +15,15 @@
     "react-dom": "^0.14.6",
     "webpack": "^1.12.11",
     "webpack-dev-server": "^1.14.1",
-    "webpack-merge": "^0.7.3",
     "material-ui": "^0.15.0-alpha",
     "react-tap-event-plugin": "^0.2.2",
     "react-router": "^2.0.1",
-    "redux": "^3.3.1"
-  },
-  "devDependencies": {
+    "redux": "^3.3.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "react-redux": "^4.4.1",
     "style-loader": "^0.13.0"
+  },
+  "devDependencies": {
   }
 }

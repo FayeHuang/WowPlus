@@ -24,7 +24,7 @@ const muiTheme = getMuiTheme({
   }
 });
 
-export default class Hello extends React.Component {
+export default class Main extends React.Component {
   
   static propTypes = {
     children: React.PropTypes.node
