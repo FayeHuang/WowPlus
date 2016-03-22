@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --config webpack.config.js"
+    "start": "webpack-dev-server --config webpack.dev.config.js"
   },
   "dependencies": {
     "babel-core": "^6.4.0",

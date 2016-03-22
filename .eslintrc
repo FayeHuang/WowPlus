@@ -1,17 +1,39 @@
 {
-  // use babel-eslint for parsing!
-  "parser": "babel-eslint",
-  "env": {
-    // for browser
-    "browser": true,
-    // in CommonJS
-    "node": true
+  plugins: [
+    'react'
+  ],
+
+  'global':{
+    '$':'jQuery'
   },
-  // some rule options:
-  "rules": {
-    "quotes": [2, "single"],
-    "eol-last": [0],
-    "no-mixed-requires": [0],
-    "no-underscore-dangle": [0]
+
+  // use babel-eslint for parsing!
+  'parser': 'babel-eslint',
+  'env': {
+    
+    'browser': true, // for browser    
+    'es6': true, //enable all ECMAScript 6 features except for modules
+    'node': true,
+    'jquery':true,
+  },
+  
+  'parserOptions': {
+    'ecmaFeatures': {
+      'jsx': true
+    }
+  },
+
+  'extends': ['eslint:recommended', 'plugin:react/recommended'],
+
+  'rules': {
+    'quotes': [2, 'single', 'avoid-escape'],
+    'eol-last': [0],
+    'no-mixed-requires': [0],
+    'no-underscore-dangle': [0],
+
+    //overwrite, allow console.log or console.warn or console.error
+    'no-console':[2, { allow: ['log','warn', 'error'] }], 
+ 
+    'indent': [2, 2] //only allow two space
   }
 }
