@@ -22,7 +22,6 @@ export default class PageHead extends React.Component {
     return (
       <div>
         <span style={{ fontSize:36, paddingRight:'20px' }}>{this.props.title}</span>
-        <LastUpdateTime dateTime={this.props.dateTime} />
         {this.props.subTitle} 
       </div>
     )
