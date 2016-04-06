@@ -34,6 +34,6 @@
     //overwrite, allow console.log or console.warn or console.error
     'no-console':[2, { allow: ['log','warn', 'error'] }], 
  
-    'indent': [2, 2] //only allow two space
+    'indent': [2, 2, {'indentSwitchCase': true}] //only allow two space
   }
 }
