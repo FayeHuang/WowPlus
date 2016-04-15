@@ -5,3 +5,4 @@
 !webpack.config.js
 !webpack.dev.config.js
 !.eslintrc
+!server.js

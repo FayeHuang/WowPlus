@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --config webpack.dev.config.js"
+    "dev": "webpack-dev-server --config webpack.dev.config.js",
+    "start": "./node_modules/.bin/webpack --config webpack.config.js && node server.js"
   },
   "dependencies": {
     "babel-core": "^6.4.0",
@@ -26,8 +27,7 @@
     "isomorphic-fetch": "^2.2.1",
     "react-router-redux": "^4.0.1",
     "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.0.1",
-    "express": "^4.13.4"
+    "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
   }
