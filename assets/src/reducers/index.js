@@ -79,6 +79,24 @@ function projectOverviewPage(state = {
   }
 }
 
+function projectDetailPage(state = { 
+  sortItem: 'replica', 
+  filter: ''
+}, action) {
+  switch (action.type) {
+    case CHANGE_SORT_ITEM:
+      return Object.assign({}, state, {
+        sortItem: action.item
+      })
+    case SEARCH_PROJECT:
+      return Object.assign({}, state, {
+        filter: action.filter
+      })
+    default:
+      return state
+  }
+}
+
 function historyDialog(state = {
   opened: false,
   title: '',
@@ -111,6 +129,7 @@ const rootReducer = combineReducers({
   usageData,
   projectOverviewPage,
   historyDialog,
+  projectDetailPage,
   routing: routerReducer
 })
 

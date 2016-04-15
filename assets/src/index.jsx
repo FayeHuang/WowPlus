@@ -9,6 +9,7 @@ import CpuPage from './components/CpuPage'
 import MemoryPage from './components/MemoryPage'
 
 import DiskPage from './containers/DiskPage'
+import DiskProjectPage from './containers/DiskProjectPage'
 import configureStore from './store/configureStore'
 
 import './style/main.css'
@@ -25,6 +26,7 @@ ReactDOM.render((
         <Route path="disk" component={DiskPage} />
         <Route path="cpu" component={CpuPage} />
         <Route path="memory" component={MemoryPage} />
+        <Route path="disk/:projectID" component={DiskProjectPage} />
       </Route>
     </Router>
   </Provider>

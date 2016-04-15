@@ -5,6 +5,7 @@ import RadioButtonGroup from 'material-ui/lib/radio-button-group'
 import Divider from 'material-ui/lib/divider'
 
 import PageHead from '../components/PageHead'
+// import DiskDetail from '../components/DiskDetail'
 
 import { 
   fetchUsageData, 
@@ -19,6 +20,7 @@ class DiskPage extends Component {
     data: PropTypes.object.isRequired,
     sortItem: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired,
+    isLoadingData: PropTypes.bool.isRequired, 
 
     dispatch: PropTypes.func.isRequired,
     reduxState: PropTypes.object,
@@ -26,6 +28,7 @@ class DiskPage extends Component {
 
   constructor(props) {
     super(props)
+    this._bind( 'handleSortCheck', 'handleSearchInput' )
   }
 
   _bind(...methods) {
@@ -36,8 +39,16 @@ class DiskPage extends Component {
     this.props.dispatch(fetchUsageData())
   }
 
+  handleSortCheck(value) {
+    this.props.dispatch(changeSortItem(value))
+  }
+
+  handleSearchInput(value) {
+    this.props.dispatch(searchProject(value))
+  }
+
   render() {
-    const { data, sortItem, filter, reduxState } = this.props
+    const { data, isLoadingData, sortItem, filter, reduxState } = this.props
     const isEmpty = !data.hasOwnProperty('last_updated')
     return (
       <div className="page">
@@ -67,6 +78,19 @@ class DiskPage extends Component {
             </div>
           }
         /> 
+        
+        {/*
+        <DiskDetail 
+          data={data}
+          isLoadingData={isLoadingData} 
+          sortItem={sortItem} 
+          filter={filter}
+          handleSortCheck={this.handleSortCheck} 
+          handleSearchInput={this.handleSearchInput} 
+        />
+        */}
+        
+
         {/*
         <pre>
           redux state = { JSON.stringify(reduxState, null, 2) }
@@ -82,6 +106,7 @@ function mapStateToProps(state) {
   const { usageData, projectOverviewPage } = state
   return {
     data: usageData.data,
+    isLoadingData: usageData.isFetching,
     sortItem: projectOverviewPage.projectSortItem,
     filter: projectOverviewPage.projectFilter,
     reduxState: state
