@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import GoogleMap from 'google-map-react'
@@ -8,6 +9,12 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import Dialog from 'material-ui/lib/dialog'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button';
+import ListItem from 'material-ui/lib/lists/list-item';
+import Card from 'material-ui/lib/card/card';
+import CardHeader from 'material-ui/lib/card/card-header';
+import CardText from 'material-ui/lib/card/card-text';
+import Divider from 'material-ui/lib/divider';
+
 
 // google-map-react 
 import { fitBounds } from 'google-map-react/utils';
@@ -29,9 +36,17 @@ const customContentStyle = {
   maxWidth: 'none',
 };
 
+const legendStyle = {
+  height: '5px', 
+  width:'30px', 
+  display: 'inline-block', 
+  verticalAlign: 'middle', 
+  marginRight: '10px',
+  opacity: 0.85
+}
 
 
-export default class App extends Component {
+export default class Map extends Component {
   static defaultProps = {
     center: {lat: 31.34085001, lng: 121.2839},
     zoom: 12,
@@ -43,8 +58,8 @@ export default class App extends Component {
     this.state = {
       open: false,
       data: [],
-      center: {lat: 31.34085001, lng: 121.2839},
-      zoom: 12
+      center: {lat: 31.23414, lng: 121.50043},
+      zoom: 13
     }
   }
 
@@ -146,12 +161,46 @@ export default class App extends Component {
         counter++
       }
     })
+
+    
     return (
       <div style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
         <AppBar
-          title="DataGo"
+          title={<Link to="/" style={{textDecoration: 'none', color:'white'}}>DataGo</Link>}
           iconElementRight={<RaisedButton label="Draw Map" onTouchTap={this.handleOpen} />}
+          showMenuIconButton={false}
         />
+
+        <Card 
+          style={{ top:'74px', left:10, position: 'absolute', minWidth: 300, opacity: 0.95 }}
+        >
+          <CardHeader
+            title="地區"
+          />
+          <CardText>
+            <div style={{paddingBottom:'10px'}}>
+              <div style={{ ...legendStyle, backgroundColor:'#FF4700' }} />
+              大宁地区
+            </div>
+
+            <div style={{paddingBottom:'10px'}}>
+              <div style={{ ...legendStyle, backgroundColor:'#0089FF' }} />
+              北外滩区域
+            </div>
+
+            <div style={{paddingBottom:'10px'}}>
+              <div style={{ ...legendStyle, backgroundColor:'#00FFC4' }} />
+              卢湾地区
+            </div>
+
+            <div style={{paddingBottom:'10px'}}>
+              <div style={{ ...legendStyle, backgroundColor:'#FF9900' }} />
+              三林地区
+            </div>
+            
+          </CardText>
+        </Card>
+
         <Dialog
           title="Input Data"
           modal={false}
@@ -159,7 +208,16 @@ export default class App extends Component {
           contentStyle={customContentStyle}
           onRequestClose={this.handleClose}
           actions={actions}
+          style={{overflow: 'scroll'}}
         >
+          <ListItem
+            primaryText={
+              <div>
+                <span>/user/hive/warehouse/syslog.db</span>
+                <span style={{float:'right'}}>30TB</span>
+              </div>
+            }
+          />
           <TextField
             floatingLabelText="Enter input data "
             multiLine={true}
@@ -170,9 +228,72 @@ export default class App extends Component {
           />
         </Dialog>
         <GoogleMap
+          onGoogleApiLoaded={({map, maps}) =>
+            { 
+              console.log(map, maps)
+              var daningArea = new google.maps.Rectangle({
+                strokeColor: '#FF4700',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF4700',
+                fillOpacity: 0.35,
+                map: map,
+                bounds: {
+                  north: 31.30025,
+                  south: 31.2354,
+                  east: 121.48956,
+                  west: 121.44149
+                }
+              });
+              var northBundArea = new google.maps.Rectangle({
+                strokeColor: '#0089FF',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#0089FF',
+                fillOpacity: 0.35,
+                map: map,
+                bounds: {
+                  north: 31.28999,
+                  south: 31.23981,
+                  east: 121.55445,
+                  west: 121.49814
+                }
+              });
+              var luwanArea = new google.maps.Rectangle({
+                strokeColor: '#00FFC4',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#00FFC4',
+                fillOpacity: 0.35,
+                map: map,
+                bounds: {
+                  north: 31.23482,
+                  south: 31.18446,
+                  east: 121.49934,
+                  west: 121.4245
+                }
+              });
+              var sanlinArea = new google.maps.Rectangle({
+                strokeColor: '#FF9900',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF9900',
+                fillOpacity: 0.35,
+                map: map,
+                bounds: {
+                  north: 31.23658,
+                  south: 31.19018,
+                  east: 121.55977,
+                  west: 121.50621
+                }
+              });
+            }
+          }
+          yesIWantToUseGoogleMapApiInternals
           ref={(refs) => this.myMap = refs}
           defaultCenter={this.state.center}
-          defaultZoom={this.state.zoom}>
+          defaultZoom={this.state.zoom}
+        >
           {children}
         </GoogleMap>
       </div>
