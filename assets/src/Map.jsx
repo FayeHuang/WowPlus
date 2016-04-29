@@ -23,6 +23,7 @@ import LatLng from 'google-map-react/lib/utils/lib_geo/lat_lng';
 
 import Place from './Place'
 import {getRandomColor} from './lib.js'
+import {locusData} from './data'
 
 
 //Needed for onTouchTap
@@ -143,26 +144,42 @@ export default class Map extends Component {
       />,
     ];
 
+    // let children = []
+    // this.state.data.forEach( (record) => {
+    //   let color = getRandomColor()
+    //   let counter = 1
+    //   while (counter <= 24) {
+    //     record[counter]['lat'] != '' ?
+    //       children.push(
+    //         <Place
+    //           lat={record[counter]['lat']} 
+    //           lng={record[counter]['lng']}
+    //           text={counter.toString()}
+    //           key={`${record.imei}-${record.date}-${counter}`}
+    //           color={color}
+    //         />
+    //       ) : false
+    //     counter++
+    //   }
+    // })
     let children = []
-    this.state.data.forEach( (record) => {
-      let color = getRandomColor()
-      let counter = 1
-      while (counter <= 24) {
-        record[counter]['lat'] != '' ?
-          children.push(
-            <Place
-              lat={record[counter]['lat']} 
-              lng={record[counter]['lng']}
-              text={counter.toString()}
-              key={`${record.imei}-${record.date}-${counter}`}
-              color={color}
-            />
-          ) : false
-        counter++
-      }
-    })
-
-    
+    // for ( var area in locusData ) {
+    //   var color = locusData[area].color
+    //   var text = locusData[area].icon
+    //   locusData[area].clustering.forEach( (location) => {
+    //     console.log(location)
+    //     children.push(
+    //       <Place
+    //         lat={location[1]} 
+    //         lng={location[0]}
+    //         text={text}
+    //         key={`${location[1]}-${location[0]}`}
+    //         color={color}
+    //       />
+    //     )
+    //   })
+    // }
+        
     return (
       <div style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
         <AppBar
@@ -229,66 +246,86 @@ export default class Map extends Component {
         </Dialog>
         <GoogleMap
           onGoogleApiLoaded={({map, maps}) =>
-            { 
-              console.log(map, maps)
-              var daningArea = new google.maps.Rectangle({
-                strokeColor: '#FF4700',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#FF4700',
-                fillOpacity: 0.35,
-                map: map,
-                bounds: {
-                  north: 31.30025,
-                  south: 31.2354,
-                  east: 121.48956,
-                  west: 121.44149
-                }
-              });
-              var northBundArea = new google.maps.Rectangle({
-                strokeColor: '#0089FF',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#0089FF',
-                fillOpacity: 0.35,
-                map: map,
-                bounds: {
-                  north: 31.28999,
-                  south: 31.23981,
-                  east: 121.55445,
-                  west: 121.49814
-                }
-              });
-              var luwanArea = new google.maps.Rectangle({
-                strokeColor: '#00FFC4',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#00FFC4',
-                fillOpacity: 0.35,
-                map: map,
-                bounds: {
-                  north: 31.23482,
-                  south: 31.18446,
-                  east: 121.49934,
-                  west: 121.4245
-                }
-              });
-              var sanlinArea = new google.maps.Rectangle({
-                strokeColor: '#FF9900',
-                strokeOpacity: 0.8,
-                strokeWeight: 2,
-                fillColor: '#FF9900',
-                fillOpacity: 0.35,
-                map: map,
-                bounds: {
-                  north: 31.23658,
-                  south: 31.19018,
-                  east: 121.55977,
-                  west: 121.50621
-                }
-              });
+          { 
+            for (var area in locusData) {
+              // Add the circle for this city to the map.
+              var color = locusData[area].color
+              locusData[area].clustering.forEach( (location) => {
+                var lng = location[0];
+                var lat = location[1];
+                var population = location[2]
+
+                var cityCircle = new google.maps.Circle({
+                  strokeColor: color,
+                  strokeOpacity: 0.8,
+                  strokeWeight: 2,
+                  fillColor: color,
+                  fillOpacity: 0.35,
+                  map: map,
+                  center: {lat:lat, lng: lng},
+                  radius: Math.sqrt(population) * 1.1
+                });
+                
+              })
+              
             }
-          }
+              // var daningArea = new google.maps.Rectangle({
+              //   strokeColor: '#FF4700',
+              //   strokeOpacity: 0.8,
+              //   strokeWeight: 2,
+              //   fillColor: '#FF4700',
+              //   fillOpacity: 0.35,
+              //   map: map,
+              //   bounds: {
+              //     north: 31.30025,
+              //     south: 31.2354,
+              //     east: 121.48956,
+              //     west: 121.44149
+              //   }
+              // });
+              // var northBundArea = new google.maps.Rectangle({
+              //   strokeColor: '#0089FF',
+              //   strokeOpacity: 0.8,
+              //   strokeWeight: 2,
+              //   fillColor: '#0089FF',
+              //   fillOpacity: 0.35,
+              //   map: map,
+              //   bounds: {
+              //     north: 31.28999,
+              //     south: 31.23981,
+              //     east: 121.55445,
+              //     west: 121.49814
+              //   }
+              // });
+              // var luwanArea = new google.maps.Rectangle({
+              //   strokeColor: '#00FFC4',
+              //   strokeOpacity: 0.8,
+              //   strokeWeight: 2,
+              //   fillColor: '#00FFC4',
+              //   fillOpacity: 0.35,
+              //   map: map,
+              //   bounds: {
+              //     north: 31.23482,
+              //     south: 31.18446,
+              //     east: 121.49934,
+              //     west: 121.4245
+              //   }
+              // });
+              // var sanlinArea = new google.maps.Rectangle({
+              //   strokeColor: '#FF9900',
+              //   strokeOpacity: 0.8,
+              //   strokeWeight: 2,
+              //   fillColor: '#FF9900',
+              //   fillOpacity: 0.35,
+              //   map: map,
+              //   bounds: {
+              //     north: 31.23658,
+              //     south: 31.19018,
+              //     east: 121.55977,
+              //     west: 121.50621
+              //   }
+              // });
+          }}
           yesIWantToUseGoogleMapApiInternals
           ref={(refs) => this.myMap = refs}
           defaultCenter={this.state.center}
