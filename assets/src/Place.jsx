@@ -5,10 +5,7 @@ export default class Place extends Component {
   static propTypes = {
     text: PropTypes.string,
     color: PropTypes.string
-  };
-
-  static defaultProps = {};
-
+  }
 
   constructor(props) {
     super(props)

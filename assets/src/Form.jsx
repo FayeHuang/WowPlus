@@ -5,11 +5,21 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import { Link } from 'react-router'
 
 const storeItems = [
-  <MenuItem key={1} value={1} primaryText="美妝" />,
-  <MenuItem key={2} value={2} primaryText="餐飲" />,
-  <MenuItem key={3} value={3} primaryText="科技" />,
-  <MenuItem key={4} value={4} primaryText="運動" />,
-  <MenuItem key={5} value={5} primaryText="汽車" />,
+  <MenuItem key={1} value={1} primaryText="購物" />,
+  <MenuItem key={2} value={2} primaryText="IT" />,
+  <MenuItem key={3} value={3} primaryText="餐飲" />,
+  <MenuItem key={4} value={4} primaryText="房產" />,
+  <MenuItem key={5} value={5} primaryText="健康" />,
+  <MenuItem key={6} value={6} primaryText="金融" />,
+  <MenuItem key={7} value={7} primaryText="旅遊" />,
+  <MenuItem key={8} value={8} primaryText="體育" />,
+  <MenuItem key={9} value={9} primaryText="汽車" />,
+  <MenuItem key={10} value={10} primaryText="時事" />,
+  <MenuItem key={11} value={11} primaryText="社會" />,
+  <MenuItem key={12} value={12} primaryText="文娛" />,
+  <MenuItem key={13} value={13} primaryText="招聘" />,
+  <MenuItem key={14} value={14} primaryText="教育" />,
+  <MenuItem key={15} value={15} primaryText="網遊" />,
 ];
 
 const areaItems = [

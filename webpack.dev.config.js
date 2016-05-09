@@ -42,7 +42,7 @@ module.exports = {
   },
 
   // webpack dev server configuration
-  devtool: 'eval-source-map',
+  // devtool: 'eval-source-map',
   devServer: {
     contentBase: PATHS.build,
 
