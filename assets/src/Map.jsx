@@ -14,7 +14,8 @@ import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
 import Divider from 'material-ui/lib/divider';
-
+import SelectField from 'material-ui/lib/select-field';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 
 // google-map-react 
 import { fitBounds } from 'google-map-react/utils';
@@ -26,6 +27,8 @@ import {getRandomColor} from './lib.js'
 import {locusData} from '../data/AreaClustering'
 
 import InfoDialog from './InfoDialog'
+import RecommendPlace from './RecommendPlace'
+import {storeItems, dayItems, timeItems} from './constComponent'
 
 
 //Needed for onTouchTap
@@ -47,6 +50,16 @@ const legendStyle = {
   marginRight: '10px',
   opacity: 0.85
 }
+
+const storeIconStyle = { 
+  background: 'url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDEyOCAxMjgiIGhlaWdodD0iMTI4cHgiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEyOCAxMjgiIHdpZHRoPSIxMjhweCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGcgaWQ9IkxheWVyXzIiLz48ZyBpZD0iTGF5ZXJfMSI+PGc+PHBhdGggZD0iICAgIE02NC4yMzgsNTEuODUxYzAuODM0LDEuODk1LDUuMjg3LDUuNDY2LDkuNjc4LDUuNDY2YzUuMDQ4LDAsOS4wNjYtMy4zNjcsMTAuNTk3LTUuMzYxYzEuNDIxLDIuMTQyLDUuNzEsNS4yNjUsMTEuMDA1LDUuMjY1ICAgIGM1LjI5NCwwLDEwLjY1LTMuMzM0LDEwLjY1LTcuOTU4YzAtMS4xNS0wLjIzNy0xLjk5NC0wLjY1OC0zLjEyMWwtNC4xNDMtMTIuNTMzSDY2LjQ2OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMxRjIwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iICAgIE02Ni40NjgsMzMuNjA3aC0yLjY5NkgyNi42MTdsLTQuMTM1LDEyLjUzN2MtMC40MiwxLjEyNy0wLjY1LDEuOTA1LTAuNjUsMy4wNTZjMCw0LjYyNCw1LjM3Miw4LjAwMiwxMC42NjYsOC4wMDIgICAgYzUuMjk1LDAsOS42MTQtMy4wODgsMTEuMDM1LTUuMjI5YzEuNTMxLDEuOTk0LDUuNjEsNS40MDUsMTAuNjU5LDUuNDA1YzQuMzksMCw5LjIxNC0zLjYzNywxMC4wNDYtNS41MzIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIzMUYyMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9IiAgICBNMTAwLjgzOSw1Ny44Mzd2MzYuMzQ1YzAsMy4xMTItMi44OTcsNS45MTYtNi4wMSw1LjkxNkgzMy43ODZjLTMuMTEyLDAtNi4xOTgtMi44MDQtNi4xOTgtNS45MTZWNTYuNzEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIzMUYyMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iNSIvPjxwYXRoIGQ9IiAgICBNNzQuOTIsOTcuMjhWNzQuNjY0YzAtMi43MjQsMi4zNDMtNC45OTQsNS4wNjYtNC45OTRoNS43NzdjMi43MjYsMCw0LjkzNCwyLjI3MSw0LjkzNCw0Ljk5NFY5Ny4yOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjMxRjIwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iICAgIE02Mi41MjMsODcuNzAxYzAsMS4yNDQtMS4wMSwyLjI1NC0yLjI1NCwyLjI1NEgzOS45ODRjLTEuMjQ1LDAtMi4yNTQtMS4wMS0yLjI1NC0yLjI1NFY3MS45MjRjMC0xLjI0NSwxLjAwOS0yLjI1NCwyLjI1NC0yLjI1NCAgICBINjAuMjdjMS4yNDQsMCwyLjI1NCwxLjAwOSwyLjI1NCwyLjI1NFY4Ny43MDF6IiBmaWxsPSJub25lIiBzdHJva2U9IiMyMzFGMjAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjUiLz48L2c+PC9nPjwvc3ZnPg==")',
+  backgroundSize: '35px 35px',
+  backgroundRepeat: 'no-repeat',
+  width:35,height:35,
+  display: 'inline-block',
+  verticalAlign: 'middle',
+  marginRight: '5px',
+};
 
 
 export default class Map extends Component {
@@ -150,7 +163,7 @@ export default class Map extends Component {
           fillOpacity: 0.35,
           map: map,
           center: {lat:lat, lng: lng},
-          radius: Math.sqrt(population) * 1.1
+          radius: Math.sqrt(population) * 80
         });
 
         google.maps.event.addListener(cityCircle, 'click', 
@@ -171,6 +184,20 @@ export default class Map extends Component {
   render() {
 
     let children = []
+    for ( var area in locusData ) {
+      locusData[area].clustering.forEach( (location, index) => {
+        if (index < 5) {
+          children.push(
+            <Place
+              lat={location[1]} 
+              lng={location[0]}
+              text={location[2].toString()}
+              key={`${location[1]}-${location[0]}`}
+            />
+          )
+        }
+      })
+    }
     return (
       <div style={{height: '100%', position: 'relative', overflow: 'hidden'}}>
         <AppBar
@@ -181,10 +208,45 @@ export default class Map extends Component {
         <Card 
           style={{ top:'74px', left:10, position: 'absolute', minWidth: 300, opacity: 0.95 }}
         >
-          <CardHeader
-            title="地區"
-          />
-          <CardText>
+          
+          <CardText style={{fontSize:'16px'}}>
+            <h3>屬性選擇</h3>
+            <div>
+              <span style={{paddingRight:'10px', lineHeight:'48px', verticalAlign:'top'}}>興趣：</span>
+              <SelectField
+                value={10}
+                // onChange={this.handleStoreChange}
+                style={{width:'180px'}}
+              >
+                {storeItems}
+              </SelectField>
+            </div>
+            <div>
+              <span style={{paddingRight:'10px', lineHeight:'48px', verticalAlign:'top'}}>日期：</span>
+              <SelectField
+                value={1}
+                // onChange={this.handleStoreChange}
+                style={{width:'180px'}}
+              >
+                {dayItems}
+              </SelectField>
+            </div>
+            <div>
+              <span style={{paddingRight:'10px', lineHeight:'48px', verticalAlign:'top'}}>時間：</span>
+              <SelectField
+                value={1}
+                // onChange={this.handleStoreChange}
+                style={{width:'180px'}}
+              >
+                {timeItems}
+              </SelectField>
+            </div>
+            
+            
+          </CardText>
+          <Divider />
+          <CardText style={{fontSize:'16px'}}>
+            <h3>圖示說明</h3>
             <div style={{paddingBottom:'10px'}}>
               <div style={{ ...legendStyle, backgroundColor:'#FF4700' }} />
               大宁地区
@@ -196,7 +258,7 @@ export default class Map extends Component {
             </div>
 
             <div style={{paddingBottom:'10px'}}>
-              <div style={{ ...legendStyle, backgroundColor:'#00FFC4' }} />
+              <div style={{ ...legendStyle, backgroundColor:'#38C16F' }} />
               卢湾地区
             </div>
 
@@ -204,8 +266,15 @@ export default class Map extends Component {
               <div style={{ ...legendStyle, backgroundColor:'#FF9900' }} />
               三林地区
             </div>
-            
+
+            <div style={{paddingBottom:'10px'}}>
+              <div style={ storeIconStyle } />
+              推薦開店位置
+            </div>
+            <p>提示 : 圓圈裡的數字為所選之興趣屬性的人口數</p>
           </CardText>
+
+          
         </Card>
         
         <Dialog
@@ -229,6 +298,11 @@ export default class Map extends Component {
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
         >
+          
+          <RecommendPlace 
+            lng={121.4502098}
+            lat={31.28957675}
+          />
           {children}
         </GoogleMap>
       </div>

@@ -13,7 +13,7 @@ export default class Place extends Component {
 
   render() {
     return (
-       <div style={{...placeStyle, borderColor:this.props.color}}>
+       <div style={{...placeStyle, color:this.props.color}}>
           {this.props.text}
        </div>
     );
