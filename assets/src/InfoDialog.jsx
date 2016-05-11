@@ -35,10 +35,10 @@ export default class InfoDialog extends Component {
           <RaisedButton label="確定" primary={true} />
           <BarChart
             data={data[id]}
-            width={800}
+            width={1500}
             height={350}
             title="興趣屬性長條圖"
-            xAxisLabel="種類"
+            xAxisLabel=""
             yAxisLabel="人口數"
           />
         </center>

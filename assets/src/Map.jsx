@@ -280,11 +280,10 @@ export default class Map extends Component {
         <Dialog
           title={`${this.state.infoDialogData.areaDisplayName} 第 ${this.state.infoDialogData.groupId} 群集 屬性分析`}
           modal={false}
-          contentStyle={{width:'900px', maxWidth:'none'}}
+          contentStyle={customContentStyle}
           open={this.state.infoDialogOpen}
           onRequestClose={this.handleInfoDialogClose}
           autoScrollBodyContent={true}
-          autoDetectWindowHeight={true}
         >
           {this.state.infoDialogOpen ? 
             <InfoDialog center={this.state.infoDialogData.center} coordinateAmount={this.state.infoDialogData.coordinateAmount} /> : 
