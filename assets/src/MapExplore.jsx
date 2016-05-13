@@ -198,10 +198,10 @@ export default class Map extends Component {
         >
           <CardText>
             <Link to="/map/explore" style={{textDecoration: 'none'}}>
-              <FlatButton label="人群探索" disabled={true} style={{fontSize:'18px', color:'black', backgroundColor:'#ECD2D2'}} icon={<ActionSupervisorAccount />} />
+              <FlatButton label="客流分析" disabled={true} style={{fontSize:'18px', color:'black', backgroundColor:'#ECD2D2'}} icon={<ActionSupervisorAccount />} />
             </Link>
             <Link to="/map/store" style={{textDecoration: 'none'}}>
-              <FlatButton label="開店選址" primary={true} style={{fontSize:'18px'}} icon={<ActionStore />} />
+              <FlatButton label="選址服務" primary={true} style={{fontSize:'18px'}} icon={<ActionStore />} />
             </Link>
           </CardText>
 

@@ -102,10 +102,10 @@ export default class Map extends Component {
         >
           <CardText style={{fontSize:'16px'}}>
             <Link to="/map/explore" style={{textDecoration: 'none'}}>
-              <FlatButton label="人群探索" primary={true} style={{fontSize:'18px'}} icon={<ActionSupervisorAccount />} />
+              <FlatButton label="客流分析" primary={true} style={{fontSize:'18px'}} icon={<ActionSupervisorAccount />} />
             </Link>
             <Link to="/map/store" style={{textDecoration: 'none'}}>
-              <FlatButton label="開店選址" primary={true} style={{fontSize:'18px'}} icon={<ActionStore />} />
+              <FlatButton label="選址服務" primary={true} style={{fontSize:'18px'}} icon={<ActionStore />} />
             </Link>
           </CardText>
 
