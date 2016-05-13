@@ -240,7 +240,7 @@ export default class Map extends Component {
                 paddingRight:'10px', 
                 lineHeight:'48px', verticalAlign:'top'}}>日期：</span>
               <SelectField
-                value={1}
+                value={3}
                 // onChange={this.handleStoreChange}
                 style={{width:'180px'}}
               >

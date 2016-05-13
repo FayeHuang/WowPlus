@@ -33,7 +33,7 @@ export const areaItems = [
 export const dayItems = [
   <MenuItem key={1} value={1} primaryText="平日" />,
   <MenuItem key={2} value={2} primaryText="假日" />,
-  <MenuItem key={3} value={3} primaryText="不分" />,
+  <MenuItem key={3} value={3} primaryText="不分平日/假日" />,
 ];
 
 export const timeItems = [

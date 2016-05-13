@@ -25,10 +25,10 @@ export default class InfoDialog extends Component {
       <div>
         <center>
           日期： 
-          <DropDownMenu value={1}>
+          <DropDownMenu value={3}>
             {dayItems}
           </DropDownMenu>
-          時間：
+          時段：
           <DropDownMenu value={1}>
             {timeItems}
           </DropDownMenu>
