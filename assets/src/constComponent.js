@@ -23,23 +23,30 @@ export const storeItems = [
 ];
 
 export const areaItems = [
-  <MenuItem key={1} value={1} primaryText="大宁地区" />,
-  <MenuItem key={2} value={2} primaryText="北外滩区域" />,
-  <MenuItem key={3} value={3} primaryText="卢湾地区" />,
-  <MenuItem key={4} value={4} primaryText="三林地区" />,
+  <MenuItem key={1} value={1} primaryText="大宁" />,
+  <MenuItem key={2} value={2} primaryText="北外滩" />,
+  <MenuItem key={3} value={3} primaryText="卢湾" />,
+  <MenuItem key={4} value={4} primaryText="三林" />,
+  <MenuItem key={5} value={5} primaryText="所有區域" />
 ];
 
 export const dayItems = [
-  <MenuItem key={1} value={1} primaryText="不分" />,
-  <MenuItem key={2} value={2} primaryText="平日" />,
-  <MenuItem key={3} value={3} primaryText="周末" />,
+  <MenuItem key={1} value={1} primaryText="平日" />,
+  <MenuItem key={2} value={2} primaryText="假日" />,
+  <MenuItem key={3} value={3} primaryText="不分" />,
 ];
 
 export const timeItems = [
-  <MenuItem key={1} value={1} primaryText="整日 (0時~24時)" />,
-  <MenuItem key={2} value={2} primaryText="早 (6時~12時)" />,
-  <MenuItem key={3} value={3} primaryText="午 (12時~18時)" />,
-  <MenuItem key={4} value={4} primaryText="晚 (18時~24時)" />,
-  <MenuItem key={5} value={5} primaryText="夜 (0時~6時)" />,
+  <MenuItem key={1} value={1} primaryText="整日" />,
+  <MenuItem key={2} value={2} primaryText="早" />,
+  <MenuItem key={3} value={3} primaryText="午" />,
+  <MenuItem key={4} value={4} primaryText="晚" />,
+  <MenuItem key={5} value={5} primaryText="夜" />,
 ]
+
+export const groupAmount = [
+  <MenuItem key={1} value={1} primaryText="10" />,
+  <MenuItem key={2} value={2} primaryText="25" />,
+  <MenuItem key={3} value={3} primaryText="50" />,
+] 
 
